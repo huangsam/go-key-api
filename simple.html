@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test CORS API</title>
+  <title>Test CORS API</title>
 </head>
 <body>
-    <p>Inspect the console for more details</p>
-    <p>POST status: <span id="status-message">unknown</span></p>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script type="text/javascript">
-        function tryAxiosPost() {
-            axios.post("http://localhost:3000/api/apikey/",
-                       {"user_id": 16})
-            .then(function (response) {
-                console.log(response)
-                document.getElementById("status-message").innerHTML = "success"
-            })
-            .catch(function (error) {
-                console.error(error)
-                document.getElementById("status-message").innerHTML = "failure"
-            })
-        }
-        $(document).ready(function () {
-            setTimeout(tryAxiosPost, 1000)
-        })
-    </script>
+  <p>Inspect the console for more details</p>
+  <p>POST status: <span id="status-message">unknown</span></p>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script type="text/javascript">
+    function tryAxiosPost() {
+      axios.post("http://localhost:3000/api/apikey/",
+             {"user_id": 16})
+      .then(function (response) {
+        console.log(response)
+        document.getElementById("status-message").innerHTML = "success"
+      })
+      .catch(function (error) {
+        console.error(error)
+        document.getElementById("status-message").innerHTML = "failure"
+      })
+    }
+    $(document).ready(function () {
+      setTimeout(tryAxiosPost, 1000)
+    })
+  </script>
 </body>
 </html>
