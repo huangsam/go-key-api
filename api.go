@@ -32,8 +32,13 @@ type ServerStatus struct {
 
 // Local state
 var apiEndpoints map[string][]string = make(map[string][]string)
-var apiKeyNotFound string = "404 api key not found"
 var httpRouter http.Handler
+
+// Constants
+var apiKeyNotFound string = "404 api key not found"
+var allowedHeaders []string = []string{"Content-Type", "X-Requested-With"}
+var allowedOrigins []string = []string{"*"}
+var allowedMethods []string = []string{"GET", "POST", "PATCH", "DELETE", "OPTIONS"}
 
 // Dummy keys
 var apiKeys []ApiKey = []ApiKey{
@@ -117,16 +122,19 @@ func main() {
 func GetRouter() http.Handler {
 	r := mux.NewRouter()
 	apir := r.PathPrefix("/api/").Subrouter()
-	apir.Handle("/apikey/", ApiKeyCoarse).Methods("GET", "POST")
-	apir.Handle("/apikey/{id}/", ApiKeyGranular).Methods("GET", "DELETE")
-	apir.HandleFunc("/apikey/{id}/archive/", ArchiveApiKey).Methods("PATCH")
-	apir.HandleFunc("/apikey/authenticate/", AuthenticateApiKey).Methods("POST")
+	apir.Handle("/apikey/", ApiKeyCoarse).Methods("GET", "POST", "OPTIONS")
+	apir.Handle("/apikey/{id}/", ApiKeyGranular).Methods("GET", "DELETE", "OPTIONS")
+	apir.HandleFunc("/apikey/{id}/archive/", ArchiveApiKey).Methods("PATCH", "OPTIONS")
+	apir.HandleFunc("/apikey/authenticate/", AuthenticateApiKey).Methods("POST", "OPTIONS")
 	miscr := r.PathPrefix("/").Subrouter()
 	miscr.HandleFunc("/health/", HealthCheck).Methods("GET")
 	miscr.HandleFunc("/", GetEndpoints).Methods("GET")
 	apir.Walk(registerEndpoints)
 	miscr.Walk(registerEndpoints)
-	return r
+	headersOK := handlers.AllowedHeaders(allowedHeaders)
+	originsOK := handlers.AllowedOrigins(allowedOrigins)
+	methodsOK := handlers.AllowedMethods(allowedMethods)
+	return handlers.CORS(headersOK, originsOK, methodsOK)(r)
 }
 
 // ApiKeyCoarse handles key retrieval and creation
@@ -208,6 +216,9 @@ func DeleteApiKey(w http.ResponseWriter, r *http.Request) {
 
 // ArchiveApiKey archives a single API key
 func ArchiveApiKey(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "OPTIONS" {
+		return
+	}
 	params := mux.Vars(r)
 	searchId, err := strconv.Atoi(params["id"])
 	if err != nil {
@@ -225,6 +236,9 @@ func ArchiveApiKey(w http.ResponseWriter, r *http.Request) {
 
 // AuthenticateApiKey confirms the existence of a single API key
 func AuthenticateApiKey(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "OPTIONS" {
+		return
+	}
 	var apiKey ApiKey
 	err := json.NewDecoder(r.Body).Decode(&apiKey)
 	if err != nil {
