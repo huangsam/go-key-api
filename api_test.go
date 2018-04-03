@@ -66,3 +66,13 @@ func TestGetEndpoints(t *testing.T) {
 		t.Fatalf("%v error: endpoint(s) are missing from docs", endpoint)
 	}
 }
+
+func BenchmarkHealthCheck(b *testing.B) {
+	endpoint := "/health/"
+	req, _ := http.NewRequest("GET", endpoint, nil)
+	resp := httptest.NewRecorder()
+	httpRouter := GetRouter()
+	for i := 0; i < b.N; i++ {
+		httpRouter.ServeHTTP(resp, req)
+	}
+}
