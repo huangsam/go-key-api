@@ -47,6 +47,16 @@ func TestHealthCheck(t *testing.T) {
 	}
 }
 
+func BenchmarkHealthCheck(b *testing.B) {
+	endpoint := "/health/"
+	req, _ := http.NewRequest("GET", endpoint, nil)
+	resp := httptest.NewRecorder()
+	httpRouter := GetRouter()
+	for i := 0; i < b.N; i++ {
+		httpRouter.ServeHTTP(resp, req)
+	}
+}
+
 func TestGetEndpoints(t *testing.T) {
 	endpoint := "/"
 	req, _ := http.NewRequest("GET", endpoint, nil)
@@ -64,15 +74,5 @@ func TestGetEndpoints(t *testing.T) {
 	_, ok := apiEndpoints[endpoint]
 	if !ok {
 		t.Fatalf("%v error: endpoint(s) are missing from docs", endpoint)
-	}
-}
-
-func BenchmarkHealthCheck(b *testing.B) {
-	endpoint := "/health/"
-	req, _ := http.NewRequest("GET", endpoint, nil)
-	resp := httptest.NewRecorder()
-	httpRouter := GetRouter()
-	for i := 0; i < b.N; i++ {
-		httpRouter.ServeHTTP(resp, req)
 	}
 }
