@@ -1,6 +1,4 @@
-// Package main initializes a HTTP server for managing API keys. One
-// enhancement for this solution is to add CORS. This would simply mean
-// adding the CORS handler to the router and OPTION method to all endpoints.
+// Package main runs a key authentication server
 package main
 
 import (
