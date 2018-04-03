@@ -16,7 +16,7 @@ First download the dependencies:
 
 Then run the main package:
 
-    go run main.go
+    go run api.go
 
 Access the server from port 3000 using your client of choice.
 
