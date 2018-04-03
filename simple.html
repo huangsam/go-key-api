@@ -14,11 +14,11 @@
                  {"user_id": 16})
       .then(function (response) {
         console.log(response)
-        document.getElementById("status-message").innerHTML = "success"
+        $("#status-message").html("success")
       })
       .catch(function (error) {
         console.error(error)
-        document.getElementById("status-message").innerHTML = "failure"
+        $("#status-message").html("failure")
       })
     }
     $(document).ready(function () {
