@@ -50,7 +50,7 @@ var apiKeys []ApiKey = []ApiKey{
 }
 
 // Dummy sequence number
-var apiKeySequenceNumber = 5
+var apiKeySequenceNumber = len(apiKeys) + 1
 
 // registerEndpoints registers paths and associated methods
 func registerEndpoints(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
