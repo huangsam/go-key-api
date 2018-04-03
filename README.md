@@ -4,7 +4,7 @@ Golang HTTP server for managing API keys
 
 ## Getting started
 
-### Installation
+### Package installation
 
 First download the dependencies:
 
@@ -12,14 +12,22 @@ First download the dependencies:
     go get github.com/gorilla/handlers
     go get github.com/gorilla/mux
 
-### HTTP server
+### Server startup
 
 Then run the main package:
 
     go run main.go
 
-### HTTP tests
+Access the server from port 3000 using your client of choice.
 
-Some HTTP server tests were included:
+### Server tests
+
+The server was tested at the following key endpoints:
+
+- `/`
+- `/health/`
+- `/api/apikey/`
+
+More endpoints can be tested in the future. To run the suite:
 
     go test
