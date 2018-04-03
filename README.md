@@ -1,6 +1,6 @@
-# go-key-api
+# keyauth
 
-Golang HTTP server for managing API keys
+Golang server that manages API keys for authenticated users
 
 ## Getting started
 
