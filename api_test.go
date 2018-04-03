@@ -54,6 +54,15 @@ func TestGetEndpoints(t *testing.T) {
 	httpRouter := GetRouter()
 	httpRouter.ServeHTTP(resp, req)
 	if resp.Code != http.StatusOK {
-		t.Fatalf("%v - %v", endpoint, resp.Code)
+		t.Fatalf("%v error: %v", endpoint, resp.Code)
+	}
+	var apiEndpoints map[string][]string
+	err := json.NewDecoder(resp.Body).Decode(&apiEndpoints)
+	if err != nil {
+		t.Fatalf("%v error: %v", endpoint, err)
+	}
+	_, ok := apiEndpoints[endpoint]
+	if !ok {
+		t.Fatalf("%v error: endpoint(s) are missing from docs", endpoint)
 	}
 }
