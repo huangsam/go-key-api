@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-// ApiKey is uniquely identified by Content
+// ApiKey is uniquely identified by content
 type ApiKey struct {
 	Id           int       `json:"id"`
 	UserId       int       `json:"user_id"`
@@ -24,7 +24,7 @@ type ApiKey struct {
 	TimeArchived time.Time `json:"time_archived"`
 }
 
-// ServerStatus has status and failures
+// ServerStatus has message and failures
 type ServerStatus struct {
 	Message  string   `json:"message"`
 	Failures []string `json:"failures"`
