@@ -34,7 +34,7 @@ var httpRouter http.Handler
 
 // Constants
 var apiKeyNotFound string = "404 api key not found"
-var allowedHeaders []string = []string{"Content-Type", "X-Requested-With"}
+var allowedHeaders []string = []string{"Authorization", "Content-Type", "X-Requested-With"}
 var allowedOrigins []string = []string{"*"}
 var allowedMethods []string = []string{"GET", "POST", "PATCH", "DELETE", "OPTIONS"}
 
