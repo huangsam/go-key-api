@@ -1,5 +1,5 @@
-// Package endpoints stores API endpoints
-package endpoints
+// Package apis stores API endpoints
+package apis
 
 import (
     "time"

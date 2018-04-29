@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/huangsam/keyauth/apis"
 	"github.com/huangsam/keyauth/app"
-	"github.com/huangsam/keyauth/endpoints"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -19,7 +19,7 @@ func TestGetApiKeys(t *testing.T) {
 	if resp.Code != http.StatusOK {
 		t.Fatalf("%v status: %v", endpoint, resp.Code)
 	}
-	var apiKeys []endpoints.ApiKey
+	var apiKeys []apis.ApiKey
 	err := json.NewDecoder(resp.Body).Decode(&apiKeys)
 	if err != nil {
 		t.Fatalf("%v error: %v", endpoint, err)

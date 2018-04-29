@@ -3,7 +3,7 @@ package app
 
 import (
     "github.com/gorilla/mux"
-    "github.com/huangsam/keyauth/endpoints"
+    "github.com/huangsam/keyauth/apis"
 )
 
 // registerEndpoints registers paths and associated methods
@@ -16,6 +16,6 @@ func registerEndpoints(route *mux.Route, router *mux.Router, ancestors []*mux.Ro
     if err != nil {
         return err
     }
-    endpoints.ApiEndpoints[t] = m
+    apis.ApiEndpoints[t] = m
     return nil
 }
