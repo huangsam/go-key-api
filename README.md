@@ -31,3 +31,12 @@ The server was tested at the following key endpoints:
 More endpoints can be tested in the future. To run the suite:
 
     go test
+
+## Developer notes
+
+Some things to consider:
+
+- Closely resembles the folder structure [here](https://github.com/qiangxue/golang-restful-starter-kit)
+- Currently does not use database connections
+- Uses a fake data structure to act as a database
+- CORS is properly enabled for the API
