@@ -1,7 +1,9 @@
 // Package endpoints stores API endpoints
 package endpoints
 
-import "time"
+import (
+    "time"
+)
 
 // ApiKey is uniquely identified by content
 type ApiKey struct {
