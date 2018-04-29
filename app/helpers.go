@@ -1,4 +1,3 @@
-// Package app stores the base application
 package app
 
 import (
