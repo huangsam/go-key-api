@@ -4,7 +4,6 @@ package endpoints
 import (
     "encoding/json"
     "fmt"
-    "github.com/gorilla/handlers"
     "github.com/gorilla/mux"
     "net/http"
     "strconv"
@@ -25,25 +24,6 @@ type ApiKey struct {
 type ServerStatus struct {
     Message  string   `json:"message"`
     Failures []string `json:"failures"`
-}
-
-// GetRouter serves application
-func GetRouter() http.Handler {
-    r := mux.NewRouter()
-    apir := r.PathPrefix("/api/").Subrouter()
-    apir.Handle("/apikey/", ApiKeyCoarse).Methods("GET", "POST", "OPTIONS")
-    apir.Handle("/apikey/{id}/", ApiKeyGranular).Methods("GET", "DELETE", "OPTIONS")
-    apir.HandleFunc("/apikey/{id}/archive/", ArchiveApiKey).Methods("PATCH", "OPTIONS")
-    apir.HandleFunc("/apikey/authenticate/", AuthenticateApiKey).Methods("POST", "OPTIONS")
-    miscr := r.PathPrefix("/").Subrouter()
-    miscr.HandleFunc("/health/", HealthCheck).Methods("GET")
-    miscr.HandleFunc("/", GetEndpoints).Methods("GET")
-    apir.Walk(registerEndpoints)
-    miscr.Walk(registerEndpoints)
-    headersOK := handlers.AllowedHeaders(allowedHeaders)
-    originsOK := handlers.AllowedOrigins(allowedOrigins)
-    methodsOK := handlers.AllowedMethods(allowedMethods)
-    return handlers.CORS(headersOK, originsOK, methodsOK)(r)
 }
 
 // ApiKeyCoarse handles key retrieval and creation
@@ -172,5 +152,5 @@ func HealthCheck(w http.ResponseWriter, r *http.Request) {
 
 // GetEndpoints gets all endpoints
 func GetEndpoints(w http.ResponseWriter, r *http.Request) {
-    json.NewEncoder(w).Encode(apiEndpoints)
+    json.NewEncoder(w).Encode(ApiEndpoints)
 }

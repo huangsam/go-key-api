@@ -2,23 +2,8 @@
 package endpoints
 
 import (
-    "github.com/gorilla/mux"
     "strconv"
 )
-
-// registerEndpoints registers paths and associated methods
-func registerEndpoints(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
-    t, err := route.GetPathTemplate()
-    if err != nil {
-        return err
-    }
-    m, err := route.GetMethods()
-    if err != nil {
-        return err
-    }
-    apiEndpoints[t] = m
-    return nil
-}
 
 // findApiKey finds match by array index
 func findApiKey(searchId int) (int, bool) {

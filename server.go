@@ -3,7 +3,7 @@ package main
 
 import (
 	"github.com/gorilla/handlers"
-	"github.com/huangsam/keyauth/endpoints"
+	"github.com/huangsam/keyauth/app"
 	"net/http"
 	"os"
 	"time"
@@ -13,7 +13,7 @@ import (
 var httpRouter http.Handler
 
 func main() {
-	httpRouter = endpoints.GetRouter()
+	httpRouter = app.GetRouter()
 	s := &http.Server{
 		Addr:         ":3000",
 		Handler:      handlers.LoggingHandler(os.Stdout, httpRouter),

@@ -5,14 +5,11 @@ import (
     "time"
 )
 
-// Local state
-var apiEndpoints map[string][]string = make(map[string][]string)
+// Shared state
+var ApiEndpoints map[string][]string = make(map[string][]string)
 
 // Constants
 var apiKeyNotFound string = "404 api key not found"
-var allowedHeaders []string = []string{"Authorization", "Content-Type", "X-Requested-With"}
-var allowedOrigins []string = []string{"*"}
-var allowedMethods []string = []string{"GET", "POST", "PATCH", "DELETE", "OPTIONS"}
 
 // Dummy keys
 var apiKeys []ApiKey = []ApiKey{

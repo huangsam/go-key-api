@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/huangsam/keyauth/app"
 	"github.com/huangsam/keyauth/endpoints"
 	"net/http"
 	"net/http/httptest"
@@ -13,7 +14,7 @@ func TestGetApiKeys(t *testing.T) {
 	endpoint := "/api/apikey/"
 	req, _ := http.NewRequest("GET", endpoint, nil)
 	resp := httptest.NewRecorder()
-	httpRouter := endpoints.GetRouter()
+	httpRouter := app.GetRouter()
 	httpRouter.ServeHTTP(resp, req)
 	if resp.Code != http.StatusOK {
 		t.Fatalf("%v status: %v", endpoint, resp.Code)
@@ -41,7 +42,7 @@ func TestHealthCheck(t *testing.T) {
 	endpoint := "/health/"
 	req, _ := http.NewRequest("GET", endpoint, nil)
 	resp := httptest.NewRecorder()
-	httpRouter := endpoints.GetRouter()
+	httpRouter := app.GetRouter()
 	httpRouter.ServeHTTP(resp, req)
 	if resp.Code != http.StatusOK {
 		t.Fatalf("%v - %v", endpoint, resp.Code)
@@ -52,7 +53,7 @@ func BenchmarkHealthCheck(b *testing.B) {
 	endpoint := "/health/"
 	req, _ := http.NewRequest("GET", endpoint, nil)
 	resp := httptest.NewRecorder()
-	httpRouter := endpoints.GetRouter()
+	httpRouter := app.GetRouter()
 	for i := 0; i < b.N; i++ {
 		httpRouter.ServeHTTP(resp, req)
 	}
@@ -62,7 +63,7 @@ func TestGetEndpoints(t *testing.T) {
 	endpoint := "/"
 	req, _ := http.NewRequest("GET", endpoint, nil)
 	resp := httptest.NewRecorder()
-	httpRouter := endpoints.GetRouter()
+	httpRouter := app.GetRouter()
 	httpRouter.ServeHTTP(resp, req)
 	if resp.Code != http.StatusOK {
 		t.Fatalf("%v error: %v", endpoint, resp.Code)
