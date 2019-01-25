@@ -16,11 +16,13 @@ First download the dependencies:
 
 Then run the main package:
 
-    go run api.go
+    go run server.go
 
 Access the server from port 3000 using your client of choice.
 
-### Server tests
+## Developers
+
+### Test suite
 
 The server was tested at the following key endpoints:
 
@@ -32,7 +34,7 @@ More endpoints can be tested in the future. To run the suite:
 
     go test
 
-## Developer notes
+## Implementation Notes
 
 Some things to consider:
 
