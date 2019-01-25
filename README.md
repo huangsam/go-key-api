@@ -35,7 +35,7 @@ More endpoints can be tested in the future. To run the suite:
 
     go test
 
-## Implementation Notes
+### Implementation Notes
 
 Some things to consider:
 
