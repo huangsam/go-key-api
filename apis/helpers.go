@@ -1,3 +1,4 @@
+// Package apis stores API endpoints
 package apis
 
 import (
